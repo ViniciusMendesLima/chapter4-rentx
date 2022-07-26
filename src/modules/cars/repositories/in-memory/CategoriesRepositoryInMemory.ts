@@ -11,10 +11,20 @@ class CategoriesRepositoryInMemory implements ICategoriesRepository {
     const category = this.categories.find((category) => category.name === name);
     return category;
   }
-  list(): Promise<Category[]> {
-    // 14:00 teste de criação de categoria
+  async list(): Promise<Category[]> {
+    const all = this.categories;
+    return all;
   }
-  create({ name, description }: ICreateCategoryDTO): Promise<void> {
-    throw new Error("Method not implemented.");
+  async create({ name, description }: ICreateCategoryDTO): Promise<void> {
+    const category = new Category();
+
+    Object.assign(category, {
+      name,
+      description,
+    });
+
+    this.categories.push(category);
   }
 }
+
+export { CategoriesRepositoryInMemory };
